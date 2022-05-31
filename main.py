@@ -1,5 +1,6 @@
 import json
 
+import requests
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -82,6 +83,14 @@ def get_anime_info(title):
                 }, 200
     else:
         return {"error": "No Info"}, 404
+
+
+@app.route('/api/ip', methods=['GET'])
+def get_ip_info():
+    response = requests.get(url="http://ident.me")
+    if response.status_code == 200:
+        return {"ip": response.text}
+    return {"error": "No info"}, 500
 
 
 @app.route('/api/sum', methods=['GET'])
