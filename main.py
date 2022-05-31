@@ -28,6 +28,7 @@ def get_group_info(group_name):
                 groups.append(group)
             json.dump(groups, file_)
         return {'status': 'ok'}, 202
+
     if request.method == 'DELETE':
         with open('groups.json', 'r') as file_:
             groups = json.load(file_)
