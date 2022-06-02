@@ -50,6 +50,14 @@ def get_anime_info(title):
     return {"error": "No Info"}, 404
 
 
+@app.route('/api/anime', methods=['POST'])
+def get_anime_all():
+    if request.method == 'POST':
+        anime = json.loads(request.data.decode('utf-8'))
+        helper.anime.insert_one(anime)
+        return {'status': 'ok'}, 201
+
+
 @app.route('/api/ip', methods=['GET'])
 def get_ip_info():
     response = requests.get(url="http://ident.me")
@@ -69,4 +77,4 @@ def get_sum_info():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=65616)
+    app.run(host='0.0.0.0', port=80)
